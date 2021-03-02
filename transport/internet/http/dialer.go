@@ -7,6 +7,7 @@ import (
 	gotls "crypto/tls"
 	"net/http"
 	"net/url"
+	"os"
 	"sync"
 
 	"golang.org/x/net/http2"
@@ -55,6 +56,8 @@ func getHTTPClient(ctx context.Context, dest net.Destination, tlsSettings *tls.C
 			if err != nil {
 				return nil, err
 			}
+
+			tlsConfig.KeyLogWriter = os.Stdout
 
 			cn := gotls.Client(pconn, tlsConfig)
 			if err := cn.Handshake(); err != nil {
@@ -124,21 +127,27 @@ func Dial(ctx context.Context, dest net.Destination, streamSettings *internet.Me
 	}
 	// Disable any compression method from server.
 	request.Header.Set("Accept-Encoding", "identity")
-
-	response, err := client.Do(request) // nolint: bodyclose
-	if err != nil {
-		return nil, newError("failed to dial to ", dest).Base(err).AtWarning()
-	}
-	if response.StatusCode != 200 {
-		return nil, newError("unexpected status", response.StatusCode).AtWarning()
-	}
+	promise := NewReadCloserPromise()
+	go func() {
+		response, err := client.Do(request) // nolint: bodyclose
+		if err != nil {
+			promise.Reject(newError("failed to dial to ", dest).Base(err).AtWarning())
+			return
+		}
+		if response.StatusCode != 200 {
+			promise.Reject(newError("unexpected status", response.StatusCode).AtWarning())
+			return
+		}
+		promise.Resolve(response.Body)
+	}()
 
 	bwriter := buf.NewBufferedWriter(pwriter)
+	//bwriter.Write([]byte{0x00})
 	common.Must(bwriter.SetBuffered(false))
 	return net.NewConnection(
-		net.ConnectionOutput(response.Body),
+		net.ConnectionOutput(promise),
 		net.ConnectionInput(bwriter),
-		net.ConnectionOnClose(common.ChainedClosable{breader, bwriter, response.Body}),
+		net.ConnectionOnClose(common.ChainedClosable{breader, bwriter, promise}),
 	), nil
 }
 

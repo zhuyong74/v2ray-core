@@ -6,6 +6,7 @@ import (
 	"context"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -71,10 +72,18 @@ func (l *Listener) ServeHTTP(writer http.ResponseWriter, request *http.Request) 
 	}
 
 	writer.Header().Set("Cache-Control", "no-store")
+
+	for _, httpHeader := range l.config.Header {
+		for _, httpHeaderValue := range httpHeader.Value {
+			writer.Header().Set(httpHeader.Name, httpHeaderValue)
+		}
+	}
+
 	writer.WriteHeader(200)
 	if f, ok := writer.(http.Flusher); ok {
 		f.Flush()
 	}
+	//writer.Write([]byte{0x00})
 
 	remoteAddr := l.Addr()
 	dest, err := net.ParseDestination(request.RemoteAddr)
@@ -141,9 +150,11 @@ func Listen(ctx context.Context, address net.Address, port net.Port, streamSetti
 			ReadHeaderTimeout: time.Second * 4,
 		}
 	} else {
+		tlsc := config.GetTLSConfig(tls.WithNextProto("h2"))
+		tlsc.KeyLogWriter = os.Stdout
 		server = &http.Server{
 			Addr:              serial.Concat(address, ":", port),
-			TLSConfig:         config.GetTLSConfig(tls.WithNextProto("h2")),
+			TLSConfig:         tlsc,
 			Handler:           listener,
 			ReadHeaderTimeout: time.Second * 4,
 		}

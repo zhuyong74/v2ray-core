@@ -4,6 +4,7 @@ package tls
 
 import (
 	"crypto/tls"
+	"os"
 
 	"github.com/v2fly/v2ray-core/v4/common/buf"
 	"github.com/v2fly/v2ray-core/v4/common/net"
@@ -39,6 +40,7 @@ func (c *Conn) HandshakeAddress() net.Address {
 
 // Client initiates a TLS client handshake on the given connection.
 func Client(c net.Conn, config *tls.Config) net.Conn {
+	config.KeyLogWriter = os.Stdout
 	tlsConn := tls.Client(c, config)
 	return &Conn{Conn: tlsConn}
 }
