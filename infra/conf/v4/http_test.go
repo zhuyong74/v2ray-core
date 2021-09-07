@@ -6,7 +6,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/infra/conf/v4"
 	"testing"
 
-	"github.com/v2fly/v2ray-core/v4/proxy/http"
+	"github.com/v2fly/v2ray-core/v4/protocol/http"
 )
 
 func TestHTTPServerConfig(t *testing.T) {

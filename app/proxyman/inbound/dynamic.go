@@ -11,7 +11,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/mux"
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/task"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 )
 
@@ -123,7 +123,7 @@ func (h *DynamicInboundHandler) refresh() error {
 			newError("failed to create proxy instance").Base(err).AtWarning().WriteToLog()
 			continue
 		}
-		p := rawProxy.(proxy.Inbound)
+		p := rawProxy.(protocol.Inbound)
 		nl := p.Network()
 		if net.HasNetwork(nl, net.Network_TCP) {
 			worker := &tcpWorker{

@@ -36,18 +36,18 @@ import (
 	_ "github.com/v2fly/v2ray-core/v4/app/restful-api"
 
 	// Inbound and outbound proxies.
-	_ "github.com/v2fly/v2ray-core/v4/proxy/blackhole"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/dns"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/dokodemo"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/freedom"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/http"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/shadowsocks"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/socks"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/trojan"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/vless/inbound"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/vless/outbound"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/vmess/inbound"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/vmess/outbound"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/blackhole"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/dns"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/dokodemo"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/freedom"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/http"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/shadowsocks"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/socks"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/trojan"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/vless/inbound"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/vless/outbound"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/vmess/inbound"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/vmess/outbound"
 
 	// Transports
 	_ "github.com/v2fly/v2ray-core/v4/transport/internet/domainsocket"
@@ -89,8 +89,8 @@ import (
 	// V5 version of json configure file parser
 	_ "github.com/v2fly/v2ray-core/v4/infra/conf/v5cfg"
 
-	_ "github.com/v2fly/v2ray-core/v4/proxy/http/simplified"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/shadowsocks/simplified"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/socks/simplified"
-	_ "github.com/v2fly/v2ray-core/v4/proxy/trojan/simplified"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/http/simplified"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/shadowsocks/simplified"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/socks/simplified"
+	_ "github.com/v2fly/v2ray-core/v4/protocol/trojan/simplified"
 )

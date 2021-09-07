@@ -6,7 +6,7 @@ import (
 	core "github.com/v2fly/v2ray-core/v4"
 	"github.com/v2fly/v2ray-core/v4/app/proxyman"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/dokodemo"
+	"github.com/v2fly/v2ray-core/v4/protocol/dokodemo"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 )
 

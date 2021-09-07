@@ -12,9 +12,9 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
 	"github.com/v2fly/v2ray-core/v4/infra/conf/cfgcommon"
-	"github.com/v2fly/v2ray-core/v4/proxy/vless"
-	"github.com/v2fly/v2ray-core/v4/proxy/vless/inbound"
-	"github.com/v2fly/v2ray-core/v4/proxy/vless/outbound"
+	"github.com/v2fly/v2ray-core/v4/protocol/vless"
+	"github.com/v2fly/v2ray-core/v4/protocol/vless/inbound"
+	"github.com/v2fly/v2ray-core/v4/protocol/vless/outbound"
 )
 
 type VLessInboundFallback struct {

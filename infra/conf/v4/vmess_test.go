@@ -9,9 +9,9 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess/inbound"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess/outbound"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess/inbound"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess/outbound"
 )
 
 func TestVMessOutbound(t *testing.T) {

@@ -13,7 +13,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/features/outbound"
 	"github.com/v2fly/v2ray-core/v4/features/policy"
 	"github.com/v2fly/v2ray-core/v4/features/stats"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 	"github.com/v2fly/v2ray-core/v4/transport"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 	"github.com/v2fly/v2ray-core/v4/transport/internet/tls"
@@ -50,7 +50,7 @@ type Handler struct {
 	tag             string
 	senderSettings  *proxyman.SenderConfig
 	streamSettings  *internet.MemoryStreamConfig
-	proxy           proxy.Outbound
+	proxy           protocol.Outbound
 	outboundManager outbound.Manager
 	mux             *mux.ClientManager
 	uplinkCounter   stats.Counter
@@ -96,7 +96,7 @@ func NewHandler(ctx context.Context, config *core.OutboundHandlerConfig) (outbou
 		return nil, err
 	}
 
-	proxyHandler, ok := rawProxyHandler.(proxy.Outbound)
+	proxyHandler, ok := rawProxyHandler.(protocol.Outbound)
 	if !ok {
 		return nil, newError("not an outbound handler")
 	}
@@ -223,8 +223,8 @@ func (h *Handler) getStatCouterConnection(conn internet.Connection) internet.Con
 	return conn
 }
 
-// GetOutbound implements proxy.GetOutbound.
-func (h *Handler) GetOutbound() proxy.Outbound {
+// GetOutbound implements protocol.GetOutbound.
+func (h *Handler) GetOutbound() protocol.Outbound {
 	return h.proxy
 }
 

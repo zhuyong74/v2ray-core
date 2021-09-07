@@ -12,7 +12,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/features/policy"
 	"github.com/v2fly/v2ray-core/v4/features/stats"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 )
 
@@ -42,7 +42,7 @@ func getStatCounter(v *core.Instance, tag string) (stats.Counter, stats.Counter)
 }
 
 type AlwaysOnInboundHandler struct {
-	proxy   proxy.Inbound
+	proxy   protocol.Inbound
 	workers []worker
 	mux     *mux.Server
 	tag     string
@@ -53,7 +53,7 @@ func NewAlwaysOnInboundHandler(ctx context.Context, tag string, receiverConfig *
 	if err != nil {
 		return nil, err
 	}
-	p, ok := rawProxy.(proxy.Inbound)
+	p, ok := rawProxy.(protocol.Inbound)
 	if !ok {
 		return nil, newError("not an inbound proxy.")
 	}
@@ -182,6 +182,6 @@ func (h *AlwaysOnInboundHandler) Tag() string {
 	return h.tag
 }
 
-func (h *AlwaysOnInboundHandler) GetInbound() proxy.Inbound {
+func (h *AlwaysOnInboundHandler) GetInbound() protocol.Inbound {
 	return h.proxy
 }

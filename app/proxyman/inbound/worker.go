@@ -16,7 +16,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/task"
 	"github.com/v2fly/v2ray-core/v4/features/routing"
 	"github.com/v2fly/v2ray-core/v4/features/stats"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 	"github.com/v2fly/v2ray-core/v4/transport/internet/tcp"
 	"github.com/v2fly/v2ray-core/v4/transport/internet/udp"
@@ -27,13 +27,13 @@ type worker interface {
 	Start() error
 	Close() error
 	Port() net.Port
-	Proxy() proxy.Inbound
+	Proxy() protocol.Inbound
 }
 
 type tcpWorker struct {
 	address         net.Address
 	port            net.Port
-	proxy           proxy.Inbound
+	proxy           protocol.Inbound
 	stream          *internet.MemoryStreamConfig
 	recvOrigDest    bool
 	tag             string
@@ -106,7 +106,7 @@ func (w *tcpWorker) callback(conn internet.Connection) {
 	}
 }
 
-func (w *tcpWorker) Proxy() proxy.Inbound {
+func (w *tcpWorker) Proxy() protocol.Inbound {
 	return w.proxy
 }
 
@@ -224,7 +224,7 @@ type connID struct {
 type udpWorker struct {
 	sync.RWMutex
 
-	proxy           proxy.Inbound
+	proxy           protocol.Inbound
 	hub             *udp.Hub
 	address         net.Address
 	port            net.Port
@@ -406,13 +406,13 @@ func (w *udpWorker) Port() net.Port {
 	return w.port
 }
 
-func (w *udpWorker) Proxy() proxy.Inbound {
+func (w *udpWorker) Proxy() protocol.Inbound {
 	return w.proxy
 }
 
 type dsWorker struct {
 	address         net.Address
-	proxy           proxy.Inbound
+	proxy           protocol.Inbound
 	stream          *internet.MemoryStreamConfig
 	tag             string
 	dispatcher      routing.Dispatcher
@@ -458,7 +458,7 @@ func (w *dsWorker) callback(conn internet.Connection) {
 	}
 }
 
-func (w *dsWorker) Proxy() proxy.Inbound {
+func (w *dsWorker) Proxy() protocol.Inbound {
 	return w.proxy
 }
 

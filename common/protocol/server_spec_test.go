@@ -9,7 +9,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	. "github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/uuid"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess"
 )
 
 func TestAlwaysValidStrategy(t *testing.T) {

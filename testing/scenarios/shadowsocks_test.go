@@ -15,9 +15,9 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/dokodemo"
-	"github.com/v2fly/v2ray-core/v4/proxy/freedom"
-	"github.com/v2fly/v2ray-core/v4/proxy/shadowsocks"
+	"github.com/v2fly/v2ray-core/v4/protocol/dokodemo"
+	"github.com/v2fly/v2ray-core/v4/protocol/freedom"
+	"github.com/v2fly/v2ray-core/v4/protocol/shadowsocks"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/tcp"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/udp"
 )

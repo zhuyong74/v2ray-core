@@ -17,7 +17,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common"
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/freedom"
+	"github.com/v2fly/v2ray-core/v4/protocol/freedom"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/tcp"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/udp"
 )

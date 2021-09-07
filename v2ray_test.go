@@ -17,9 +17,9 @@ import (
 	"github.com/v2fly/v2ray-core/v4/features/dns"
 	"github.com/v2fly/v2ray-core/v4/features/dns/localdns"
 	_ "github.com/v2fly/v2ray-core/v4/main/distro/all"
-	"github.com/v2fly/v2ray-core/v4/proxy/dokodemo"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess"
-	"github.com/v2fly/v2ray-core/v4/proxy/vmess/outbound"
+	"github.com/v2fly/v2ray-core/v4/protocol/dokodemo"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess"
+	"github.com/v2fly/v2ray-core/v4/protocol/vmess/outbound"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/tcp"
 )
 

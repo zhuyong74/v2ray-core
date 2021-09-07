@@ -10,11 +10,11 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/buf"
 	"github.com/v2fly/v2ray-core/v4/common/errors"
 	"github.com/v2fly/v2ray-core/v4/common/net"
-	"github.com/v2fly/v2ray-core/v4/common/protocol"
+	commonprotocol "github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/session"
 	"github.com/v2fly/v2ray-core/v4/common/signal/done"
 	"github.com/v2fly/v2ray-core/v4/common/task"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 	"github.com/v2fly/v2ray-core/v4/transport"
 	"github.com/v2fly/v2ray-core/v4/transport/internet"
 	"github.com/v2fly/v2ray-core/v4/transport/pipe"
@@ -128,14 +128,14 @@ type ClientWorkerFactory interface {
 }
 
 type DialingWorkerFactory struct {
-	Proxy    proxy.Outbound
+	Proxy    protocol.Outbound
 	Dialer   internet.Dialer
 	Strategy ClientStrategy
 
 	ctx context.Context
 }
 
-func NewDialingWorkerFactory(ctx context.Context, proxy proxy.Outbound, dialer internet.Dialer, strategy ClientStrategy) *DialingWorkerFactory {
+func NewDialingWorkerFactory(ctx context.Context, proxy protocol.Outbound, dialer internet.Dialer, strategy ClientStrategy) *DialingWorkerFactory {
 	return &DialingWorkerFactory{
 		Proxy:    proxy,
 		Dialer:   dialer,
@@ -157,7 +157,7 @@ func (f *DialingWorkerFactory) Create() (*ClientWorker, error) {
 		return nil, err
 	}
 
-	go func(p proxy.Outbound, d internet.Dialer, c common.Closable) {
+	go func(p protocol.Outbound, d internet.Dialer, c common.Closable) {
 		ctx := session.ContextWithOutbound(f.ctx, &session.Outbound{
 			Target: net.TCPDestination(muxCoolAddress, muxCoolPort),
 		})
@@ -253,9 +253,9 @@ func writeFirstPayload(reader buf.Reader, writer *Writer) error {
 
 func fetchInput(ctx context.Context, s *Session, output buf.Writer) {
 	dest := session.OutboundFromContext(ctx).Target
-	transferType := protocol.TransferTypeStream
+	transferType := commonprotocol.TransferTypeStream
 	if dest.Network == net.Network_UDP {
-		transferType = protocol.TransferTypePacket
+		transferType = commonprotocol.TransferTypePacket
 	}
 	s.transferType = transferType
 	writer := NewWriter(s.ID, dest, output, transferType)
@@ -336,7 +336,7 @@ func (m *ClientWorker) handleStatusKeep(meta *FrameMetadata, reader *buf.Buffere
 	s, found := m.sessionManager.Get(meta.SessionID)
 	if !found {
 		// Notify remote peer to close this session.
-		closingWriter := NewResponseWriter(meta.SessionID, m.link.Writer, protocol.TransferTypeStream)
+		closingWriter := NewResponseWriter(meta.SessionID, m.link.Writer, commonprotocol.TransferTypeStream)
 		closingWriter.Close()
 
 		return buf.Copy(NewStreamReader(reader), buf.Discard)
@@ -348,7 +348,7 @@ func (m *ClientWorker) handleStatusKeep(meta *FrameMetadata, reader *buf.Buffere
 		newError("failed to write to downstream. closing session ", s.ID).Base(err).WriteToLog()
 
 		// Notify remote peer to close this session.
-		closingWriter := NewResponseWriter(meta.SessionID, m.link.Writer, protocol.TransferTypeStream)
+		closingWriter := NewResponseWriter(meta.SessionID, m.link.Writer, commonprotocol.TransferTypeStream)
 		closingWriter.Close()
 
 		drainErr := buf.Copy(rr, buf.Discard)

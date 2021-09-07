@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/v2fly/v2ray-core/v4/common/net"
-	"github.com/v2fly/v2ray-core/v4/proxy/dokodemo"
+	"github.com/v2fly/v2ray-core/v4/protocol/dokodemo"
 )
 
 func TestDokodemoConfig(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/v2fly/v2ray-core/v4/common/net"
-	"github.com/v2fly/v2ray-core/v4/proxy/dns"
+	"github.com/v2fly/v2ray-core/v4/protocol/dns"
 )
 
 func TestDnsProxyConfig(t *testing.T) {

@@ -19,8 +19,8 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/buf"
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/freedom"
-	v2http "github.com/v2fly/v2ray-core/v4/proxy/http"
+	"github.com/v2fly/v2ray-core/v4/protocol/freedom"
+	v2http "github.com/v2fly/v2ray-core/v4/protocol/http"
 	v2httptest "github.com/v2fly/v2ray-core/v4/testing/servers/http"
 	"github.com/v2fly/v2ray-core/v4/testing/servers/tcp"
 )

@@ -8,7 +8,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
 	"github.com/v2fly/v2ray-core/v4/infra/conf/cfgcommon"
-	"github.com/v2fly/v2ray-core/v4/proxy/http"
+	"github.com/v2fly/v2ray-core/v4/protocol/http"
 )
 
 type HTTPAccount struct {

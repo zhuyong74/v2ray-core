@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package v2ray.core.protocol.protocol.encoding;
+option csharp_namespace = "V2Ray.Core.Protocol.Vless.Encoding";
+option go_package = "github.com/v2fly/v2ray-core/v4/protocol/vless/encoding";
+option java_package = "com.v2ray.core.protocol.vless.encoding";
+option java_multiple_files = true;
+
+message Addons {
+  string Flow = 1;
+  bytes Seed = 2;
+}

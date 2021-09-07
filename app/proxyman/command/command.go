@@ -10,7 +10,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common"
 	"github.com/v2fly/v2ray-core/v4/features/inbound"
 	"github.com/v2fly/v2ray-core/v4/features/outbound"
-	"github.com/v2fly/v2ray-core/v4/proxy"
+	"github.com/v2fly/v2ray-core/v4/protocol"
 )
 
 // InboundOperation is the interface for operations that applies to inbound handlers.
@@ -25,8 +25,8 @@ type OutboundOperation interface {
 	ApplyOutbound(context.Context, outbound.Handler) error
 }
 
-func getInbound(handler inbound.Handler) (proxy.Inbound, error) {
-	gi, ok := handler.(proxy.GetInbound)
+func getInbound(handler inbound.Handler) (protocol.Inbound, error) {
+	gi, ok := handler.(protocol.GetInbound)
 	if !ok {
 		return nil, newError("can't get inbound proxy from handler.")
 	}
@@ -39,7 +39,7 @@ func (op *AddUserOperation) ApplyInbound(ctx context.Context, handler inbound.Ha
 	if err != nil {
 		return err
 	}
-	um, ok := p.(proxy.UserManager)
+	um, ok := p.(protocol.UserManager)
 	if !ok {
 		return newError("proxy is not a UserManager")
 	}
@@ -56,7 +56,7 @@ func (op *RemoveUserOperation) ApplyInbound(ctx context.Context, handler inbound
 	if err != nil {
 		return err
 	}
-	um, ok := p.(proxy.UserManager)
+	um, ok := p.(protocol.UserManager)
 	if !ok {
 		return newError("proxy is not a UserManager")
 	}

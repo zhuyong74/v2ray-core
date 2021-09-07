@@ -8,7 +8,7 @@ import (
 
 	v2net "github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
-	"github.com/v2fly/v2ray-core/v4/proxy/freedom"
+	"github.com/v2fly/v2ray-core/v4/protocol/freedom"
 )
 
 type FreedomConfig struct {

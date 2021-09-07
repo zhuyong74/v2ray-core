@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/blackhole"
+	"github.com/v2fly/v2ray-core/v4/protocol/blackhole"
 )
 
 func TestHTTPResponseJSON(t *testing.T) {

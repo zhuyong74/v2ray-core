@@ -9,7 +9,7 @@ import (
 	"github.com/v2fly/v2ray-core/v4/common/net"
 	"github.com/v2fly/v2ray-core/v4/common/protocol"
 	"github.com/v2fly/v2ray-core/v4/common/serial"
-	"github.com/v2fly/v2ray-core/v4/proxy/socks"
+	"github.com/v2fly/v2ray-core/v4/protocol/socks"
 )
 
 func TestSocksInboundConfig(t *testing.T) {
