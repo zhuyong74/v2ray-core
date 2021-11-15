@@ -79,7 +79,9 @@ func (v *Dispatcher) getInboundRay(ctx context.Context, dest net.Destination) *c
 
 func (v *Dispatcher) Dispatch(ctx context.Context, destination net.Destination, payload *buf.Buffer) {
 	// TODO: Add user to destString
-	newError("dispatch request to: ", destination).AtDebug().WriteToLog(session.ExportIDToError(ctx))
+	//newError("dispatch request to: ", destination).AtDebug().WriteToLog(session.ExportIDToError(ctx))
+	//newError("dispatch request to: ", destination).AtDebug().WriteToLog(session.ExportIDToError(ctx))
+	//newError("test for ", destination).AtDebug().WriteToLog(session.ExportIDToError(ctx))
 
 	conn := v.getInboundRay(ctx, destination)
 	outputStream := conn.link.Writer
@@ -94,6 +96,7 @@ func (v *Dispatcher) Dispatch(ctx context.Context, destination net.Destination, 
 
 func handleInput(ctx context.Context, conn *connEntry, dest net.Destination, callback ResponseCallback) {
 	defer conn.cancel()
+	newError("handleInput: ").AtDebug().WriteToLog(session.ExportIDToError(ctx))
 
 	input := conn.link.Reader
 	timer := conn.timer
